@@ -1,0 +1,34 @@
+{{ ansible_managed | comment }}
+
+{% for alias in sudo_user_aliases %}
+User_Alias {{ alias.alias }} = {{ alias.users | join(', ') }}
+{% endfor -%}
+{% for alias in sudo_runas_aliases %}
+Runas_Alias {{ alias.alias }} = {{ alias.users | join(', ') }}
+{% endfor -%}
+{% for alias in sudo_host_aliases %}
+Host_Alias {{ alias.alias }} = {{ alias.hosts | join(', ') }}
+{% endfor -%}
+{% for alias in sudo_cmnd_aliases %}
+Cmnd_Alias {{ alias.alias }} = {{ alias.commands | join(', ') }}
+{% endfor -%}
+
+{% for default in sudo_defaults %}
+Defaults {{ default }}
+{% endfor %}
+
+{% for u in sudo_users %}
+{{ u.name }} {{ u.hosts }}={{ '(' + u.runas + ')' if u.runas | default('') }} {{ 'NOPASSWD:' if u.nopasswd | default(false) }}{{ u.commands | join(', ') }}
+{% endfor %}
+
+{% for g in sudo_groups %}
+%{{ g.name }} {{ g.hosts }}={{ '(' + g.runas + ')' if g.runas | default('') }} {{ 'NOPASSWD:' if g.nopasswd | default(false) }}{{ g.commands | join(', ') }}
+{% endfor %}
+
+{% for ng in sudo_netgroups %}
++{{ ng.name }} {{ ng.hosts }}={{ '(' + ng.runas + ')' if ng.runas | default('') }} {{ 'NOPASSWD:' if ng.nopasswd | default(false) }}{{ ng.commands | join(', ') }}
+{% endfor %}
+
+{% for i in sudo_include %}
+#{{ 'includedir' if i.is_dir | default(false) else 'include' }} {{ i.path }}
+{% endfor -%}

@@ -1,0 +1,80 @@
+---
+sudo_packages:
+  - sudo
+
+sudo_user_aliases: []
+# sudo_user_aliases:
+#   - alias: SYSADMINS
+#     users:
+#       - bob
+#       - jim
+#       - frank
+
+sudo_runas_aliases: []
+# sudo_user_runas_aliases:
+#   - alias: OPERATOR
+#     users:
+#       - root
+#       - operator
+
+sudo_host_aliases: []
+# sudo_host_aliases:
+#   - alias: WEB
+#     hosts:
+#       - apache-01
+#       - nginx-01
+
+sudo_cmnd_aliases: []
+# sudo_command_aliases:
+#   - alias: REBOOT
+#     commands:
+#       - /usr/sbin/shutdown
+
+sudo_defaults:
+  - env_reset
+  - mail_badpass
+  - secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+sudo_users:
+  - name: root
+    hosts: ALL
+    runas: ALL:ALL
+    commands:
+      - ALL
+# sudo_users:
+#   - name: root
+#     hosts: ALL
+#     runas: ALL
+#     commands:
+#       - ALL
+#   - name: bob
+#     hosts: +bobland  # every host in the bobland netgroup
+#     nopasswd: true
+#     commands:
+#       - /usr/bin/su wildfly
+
+sudo_groups: []
+# sudo_groups:
+#   - name: wheel
+#     hosts: ALL
+#     runas: ALL
+#     commands:
+#       - ALL
+#   - name: ssh_admins
+#     hosts: ALL
+#     runas: ALL
+#     nopasswd: true
+#     commands:
+#       - ALL
+
+sudo_netgroups: []
+# sudo_netgroups:
+#   - name: storage
+#     hosts: SAN
+#     commands:
+#       - /sbin/umount*
+#       - /sbin/mount*
+
+sudo_include:
+  - path: /etc/sudoers.d
+    is_dir: true
