@@ -25,7 +25,7 @@ sudo_host_aliases: []
 #       - nginx-01
 
 sudo_cmnd_aliases: []
-# sudo_command_aliases:
+# sudo_cmnd_aliases:
 #   - alias: REBOOT
 #     commands:
 #       - /usr/sbin/shutdown
