@@ -27,7 +27,7 @@ Defaults {{ default }}
 
 {% for ng in sudo_netgroups %}
 +{{ ng.name }} {{ ng.hosts }}={{ '(' + ng.runas + ')' if ng.runas | default('') }} {{ 'NOPASSWD:' if ng.nopasswd | default(false) }}{{ ng.commands | join(', ') }}
-{% endfor %}
+{% endfor -%}
 
 {% for i in sudo_include %}
 #{{ 'includedir' if i.is_dir | default(false) else 'include' }} {{ i.path }}
