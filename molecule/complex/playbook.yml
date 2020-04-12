@@ -1,0 +1,31 @@
+---
+- name: Converge
+  hosts: all
+  become: true
+
+  vars:
+    sudo_user_aliases:
+      - alias: SUPERADMINS
+        users:
+          - root
+    sudo_runas_aliases:
+      - alias: SUPERADMIN
+        users:
+          - root
+    sudo_host_aliases:
+      - alias: WEB
+        hosts:
+          - nginx-01
+    sudo_cmnd_aliases:
+      - alias: SHUTDOWN
+        commands:
+          - /usr/sbin/shutdown
+    sudo_netgroups:
+      - name: storage
+        hosts: SAN
+        commands:
+          - /sbin/umount*
+          - /sbin/mount*
+
+  roles:
+    - role: ansible-role-sudo
