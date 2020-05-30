@@ -1,5 +1,7 @@
 # Ansible role: Sudo
 
+![Molecule Test](https://github.com/crgwilson/ansible-role-sudo/workflows/Molecule%20Test/badge.svg)
+
 Manage the sudoers file on linux hosts
 
 * Install sudo packages
